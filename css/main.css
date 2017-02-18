@@ -1,0 +1,32 @@
+html{
+  overflow: hidden;
+}
+body{
+    background: #f7f7f7;
+}
+#header{
+  padding-top: 0.5em;
+}
+#footer{
+    background: #f6f6f6;
+    font-size: 0.7em;
+    border-top:0.5px solid #ddd;
+}
+#footer i{
+    font-size: 1.8em;
+}
+.text-gray{
+  color: #b1b1b1;
+}
+.bb{
+    border-bottom: 1px solid #ddd;
+}
+.page-users .media img{
+    width: 48px;
+    height: 48px;
+}
+.page-users .search{
+    padding:0.5em;
+    border-bottom:0.5px solid #ddd;
+    background: #f0f0f0;
+}

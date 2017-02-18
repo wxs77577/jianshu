@@ -1,0 +1,85 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>微信</title>
+    <meta name="viewport" content="user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <div class="page-user" id="app">
+        
+        <div class="container">
+            <div class="media pt-4 pb-4">
+              <img class="d-flex mr-3 rounded-circle" height="62" :src="user.avatar_source" :alt="user.nickname">
+              <div class="media-body">
+                <div class="mt-1 mb-0">{{user.nickname}}</div>
+                <div class="text-muted small">写了{{user.total_wordage}}字 · {{user.total_likes_count}}喜欢</div>
+              </div>
+            </div>
+
+            <h5>最新文章</h5>
+            <hr>
+            <div class="notes container">
+                <div class="row pt-2 pb-2 align-items-center bb" v-for="note in notes">
+                    <div class="col-2">
+                        <img :src="note.list_image_url" alt="" class="img-fluid rounded">
+                    </div>
+                    <div class="col-10">
+                        <div>{{note.title}}</div>
+                        <div class="small text-gray">
+                            <span><i class="fa fa-eye"></i> {{note.views_count}}</span>
+                            <span><i class="fa fa-comment"></i> {{note.public_comments_count}}</span>
+                            <span><i class="fa fa-heart"></i> {{note.likes_count}}</span>
+                            <span><i class="fa fa-yen"></i> {{note.total_rewards_count}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="../script/api.js"></script>
+    <script src="../script/jquery.min.js"></script>
+    <script src="../script/vue.min.js"></script>
+    <script src="../script/fastclick.js"></script>
+    <script src="../script/main.js"></script>
+    <script>
+        var vm;
+        apiready = function(){
+            app.init();
+            vm = new Vue({
+                el: '#app',
+                data: {
+                    user: {},
+                    notes: []
+                },
+                methods: {
+                    
+                    fetch: function () {
+
+                        $api.get('../api/users.json?id=' + api.pageParam.id, function (data) {
+                            vm.user = data.users[0];
+                        }, 'json');
+
+                        $api.get('../api/notes.json', function (data) {
+                            vm.notes = data;
+                        }, 'json');
+                    }
+                },
+                created: function () {
+                    this.fetch();
+                }
+            });
+        };
+            
+            
+    </script>
+
+</body>
+</html>

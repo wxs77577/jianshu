@@ -1,0 +1,67 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>微信</title>
+    <meta name="viewport" content="user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+    <div id="app">
+        <nav id="header" class="text-center text-white fixed-top bg-inverse row pb-0">
+            <div class="col-3"></div>
+            <div class="col-6"><h5>微信</h5></div>
+            <div class="col-3" onclick="select()"><i class="fa fa-plus"></i></div>
+        </nav>
+
+        <nav id="footer" class="row text-center fixed-bottom pt-2 text-muted">
+            <div class="col-3 text-success"><i class="fa fa-wechat"></i><br>微信</div>
+            <div class="col-3"><i class="fa fa-users"></i><br>通讯录</div>
+            <div class="col-3"><i class="fa fa-safari"></i><br>发现</div>
+            <div class="col-3"><i class="fa fa-user-o"></i><br>我</div>
+        </nav>
+    </div>
+    <script src="./script/api.js"></script>
+    <script src="./script/jquery.min.js"></script>
+    <script src="./script/fastclick.js"></script>
+    <script src="./script/main.js"></script>
+    <script>
+        function select () {
+            var buttons = ['照片','视频','语音'];
+            api.actionSheet({
+                title: '请选择消息类型',
+                cancelTitle: '取消',
+                buttons: buttons
+            }, function(ret, err) {
+                if (ret && ret.buttonIndex <= buttons.length) {
+                    alert(buttons[ret.buttonIndex - 1])
+                }
+            });
+        }
+
+        apiready = function () {
+            app.init();
+            api.setStatusBarStyle({
+                style: 'light',
+                color: '#292b2c'
+            });
+
+            app.openFrameGroup('index', ['main', 'user', 'main', 'user'], 'html');
+
+            $(document).on('touchstart', '#footer > div', function () {
+                api.setFrameGroupIndex({
+                    name: 'index',
+                    index: $(this).index(),
+                    scroll: false
+                });
+                $(this).addClass('text-success');
+                $(this).siblings().removeClass('text-success');
+            });
+        }
+    </script>
+</body>
+</html>
