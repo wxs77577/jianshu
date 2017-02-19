@@ -1,16 +1,15 @@
-html{
+html,body{
+  font-size:0.9rem;
+  height:100%;
   overflow: hidden;
-}
-body{
-    background: #f7f7f7;
+  background: #f7f7f7;
 }
 #header{
   padding-top: 0.5em;
 }
 #footer{
-    background: #f6f6f6;
-    font-size: 0.7em;
-    border-top:0.5px solid #ddd;
+    font-size: 0.85em;
+    border-top:1px solid #e6e6e6;
 }
 #footer i{
     font-size: 1.8em;
@@ -19,7 +18,7 @@ body{
   color: #b1b1b1;
 }
 .bb{
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #e6e6e6;
 }
 .page-users .media img{
     width: 48px;
